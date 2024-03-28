@@ -12,6 +12,9 @@ abstract public class Conta implements Movimentavel {
     protected static int contadorInstancias = 0;
     protected static List<Conta> contas = new ArrayList<>();
 
+    public static List<Conta> getContas() {
+        return contas;
+    }
 
     public String getNumeroConta() {
         return numeroConta;
@@ -51,6 +54,11 @@ abstract public class Conta implements Movimentavel {
 
         for (Conta conta : contas){
             if (conta.getNumeroConta().equals(contaDestino)){
+                if (conta instanceof ContaInvestimento){
+                    System.out.println("A conta destino é uma conta investimento, esse tipo de conta recebe valores apenas através da opção INVESTIR disponível nas funcionalidades da Conta Corrente");
+                    return 0;
+                }
+
                 if(this.sacar(valor)!=0){
                     conta.depositar(valor);
                     return valor;

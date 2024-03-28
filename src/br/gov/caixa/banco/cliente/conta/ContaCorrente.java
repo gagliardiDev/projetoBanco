@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class ContaCorrente extends Conta{
     private ContaInvestimento contaInvestimento;
-
     private final double taxaSaque = 0.005;
 
     public ContaCorrente(String tipoPessoa) {
@@ -35,14 +34,15 @@ public class ContaCorrente extends Conta{
                 '}';
     }
 
-    public ContaInvestimento getContaInvestimento() {
-        return contaInvestimento;
+    private void abrirInvestimento(){
+        System.out.println("Conta Investimento inexistente, aguarde enquanto realizamos a abertura da conta...");
+        this.contaInvestimento = new ContaInvestimento(numeroConta);
+        contas.add(contaInvestimento);
     }
 
     public void investir(double valor){
         if (this.contaInvestimento == null){
-            this.contaInvestimento = new ContaInvestimento(numeroConta);
-            System.out.println("Conta Investimento inexistente, aguarde enquanto realizamos a abertura da conta...");
+            abrirInvestimento();
         }
         if (saldo >= valor) {
             double taxaRendimento = 0.01;
@@ -60,12 +60,16 @@ public class ContaCorrente extends Conta{
     }
 
     public void resgatar(double valor){
-        if (this.contaInvestimento.resgatar(valor)){
+        if (this.contaInvestimento.sacar(valor)>0){
             saldo += valor;
         }
     }
 
     public double getSaldoAplicado(){
+        if (contaInvestimento == null){
+            System.out.println("Você ainda não possui uma conta investimento, realize sua primeira aplicação para abertura da conta.");
+            return 0;
+        }
         return this.contaInvestimento.getSaldo();
     }
 

@@ -1,14 +1,15 @@
 import br.gov.caixa.banco.Banco;
+import br.gov.caixa.banco.menu.Menu;
 import br.gov.caixa.banco.cliente.Cliente;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 public class Main {
     public static void main(String[] args) {
-        Banco banco = new Banco();
-        banco.adicionarCliente("012345678910","Marcus","PF",true);
-        banco.adicionarCliente("122222222222","Rodrigo","PF",true);
-        banco.adicionarCliente("111111111111","Caixa","PJ",true);
-        banco.adicionarCliente("333333333333","ADA Tech","PJ",true);
+        Menu menu = new Menu();
+        Banco banco = menu.getBanco();
+        banco.adicionarCliente("012345678910", "Marcus", "PF", true);
+        banco.adicionarCliente("122222222222", "Rodrigo", "PF", true);
+        banco.adicionarCliente("111111111111", "Caixa", "PJ", true);
+        banco.adicionarCliente("333333333333", "ADA Tech", "PJ", true);
         Cliente c1 = banco.getCliente("012345678910");
         Cliente c2 = banco.getCliente("111111111111");
         Cliente c3 = banco.getCliente("122222222222");
@@ -16,7 +17,7 @@ public class Main {
 
         //Verificar que os novos clientes possuem conta.Conta corrente vinculada:
         System.out.println("#Segue a relação de clientes cadastrados em nosso banco:");
-        for (Cliente cliente:banco.getClientes()){
+        for (Cliente cliente : banco.getClientes()) {
             System.out.println(cliente);
         }
         System.out.println("                                                    ");
@@ -29,7 +30,7 @@ public class Main {
         System.out.println("#Sacando R$100,00 na Conta Corrente do cliente Marcus:");
         c1.contaCorrente.sacar(100);
         System.out.println("#Transferindo R$100,00 na Conta Corrente do cliente Marcus para a Conta Corrente do cliente ADA nº: " + c4.contaCorrente.getNumeroConta());
-        c1.contaCorrente.transferir(100,c4.contaCorrente.getNumeroConta());
+        c1.contaCorrente.transferir(100, c4.contaCorrente.getNumeroConta());
         System.out.println("#Consultado saldo da Conta Corrente do cliente Marcus");
         c1.contaCorrente.getSaldo();
         System.out.println("#TESTE DE FUNCIONALIDADES CONTA CORRENTE PF CONCLUIDO");
@@ -49,7 +50,7 @@ public class Main {
         c2.contaCorrente.sacar(50);
         c2.contaCorrente.getSaldo();
         System.out.println("#Realizando Transferencia da Conta Corrente PJ");
-        c2.contaCorrente.transferir(10,c1.contaCorrente.getNumeroConta());
+        c2.contaCorrente.transferir(10, c1.contaCorrente.getNumeroConta());
         System.out.println("#Realizando Deposito na Conta Corrente PJ");
         c2.contaCorrente.depositar(1500);
         System.out.println("#TESTE DE FUNCIONALIDADES CONTA CORRENTE PJ CONCLUIDO");
@@ -113,9 +114,9 @@ public class Main {
         System.out.println("#Realizando saque de R$100,00 na conta poupanca:");
         c3.contaPoupanca.sacar(100);
         System.out.println("#Realizando transferencia de R$100,00 na conta poupanca para uma conta inexistente:");
-        c3.contaPoupanca.transferir(100,"001.5555-88");
+        c3.contaPoupanca.transferir(100, "001.5555-88");
         System.out.println("#Realizando transferencia de R$100,00 na conta poupanca para a conta " + c1.contaCorrente.getNumeroConta());
-        c3.contaPoupanca.transferir(100,c1.contaCorrente.getNumeroConta());
+        c3.contaPoupanca.transferir(100, c1.contaCorrente.getNumeroConta());
         System.out.println("#Consultando saldo da Conta");
         c3.contaPoupanca.getSaldo();
         System.out.println("#TESTE DE FUNCIONALIDADES CONTA POUPANCA PF CONCLUIDO");
@@ -134,40 +135,25 @@ public class Main {
         System.out.println("                                                    ");
         System.out.println("                                                    ");
         System.out.println("Testes concluidos, segue relação de clientes e contas abertas nesse procedimento.");
-        for (Cliente cliente:banco.getClientes()){
+        for (Cliente cliente : banco.getClientes()) {
             System.out.println(cliente);
+        }
+        System.out.println("                                                    ");
+        System.out.println("Iniciando aplicação, sinta-se a vontade para realizar novas aberturas de conta, ou movimentar as contas já existentes.");
+        System.out.println("                                                    ");
+
+
+        //INICIALIZAÇÃO DO SISTEMA PARA UTILIZAÇÃO PELO USUÁRIO
+
+        menu.exibirBoasVindas();
+        while (!menu.isSair()) {
+            menu.exibirMenu();
         }
 
 
-        /*
-        c1.contaCorrente.depositar(100);
-        System.out.println(c1.getContaCorrente());
-        c1.contaCorrente.depositar(100);
-        System.out.println(c1.getContaCorrente());
-        c1.contaCorrente.sacar(50);
-        c1.contaCorrente.sacar(51);
-        System.out.println(c1.getContaCorrente());
-        c1.contaCorrente.depositar(100);
-        c1.contaCorrente.investir(150);
-        c1.contaCorrente.resgatar(100);
-        System.out.println(c1.getContaCorrente());
-        System.out.println(c2.getContaCorrente());
-        c2.contaCorrente.depositar(150);
-        c2.contaCorrente.investir(100);
-        System.out.println(c2.getContaCorrente());
-        System.out.println(c2.getContaCorrente());
-        banco.adicionarPoupanca(c1);
-        System.out.println(c1.getContaCorrente());
-        c1.contaCorrente.transferir(10,c2.contaCorrente.getNumeroConta());
-        c2.contaCorrente.transferir(10,c1.contaCorrente.getNumeroConta());
-        c1.contaPoupanca.depositar(100);
-        System.out.println(c1.contaPoupanca.getSaldo());
-        c1.contaCorrente.transferir(10,"0003.555.6-4");*/
-
-
-
     }
+
 }
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 
 

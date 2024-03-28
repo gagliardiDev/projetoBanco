@@ -9,17 +9,17 @@ public class ContaInvestimento extends Conta{
         saldo += valor;
         return valor;
     }
-    public boolean resgatar(double valor){
+
+    public double sacar(double valor){
         if (saldo >= valor) {
             saldo -= valor;
             System.out.println("R$" + valor +" resgatados em sua Conta Corrente");
-            return true;
+            return valor;
         }
         System.out.println("Saldo insuficiente na aplicação");
         System.out.println("Saldo atual de R$" + saldo);
-        return false;
+        return 0;
     }
-
 
     @Override
     public String toString() {

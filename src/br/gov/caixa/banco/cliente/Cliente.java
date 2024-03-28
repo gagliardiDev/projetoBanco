@@ -1,5 +1,4 @@
 package br.gov.caixa.banco.cliente;
-import br.gov.caixa.banco.cliente.conta.Conta;
 import br.gov.caixa.banco.cliente.conta.ContaCorrente;
 import br.gov.caixa.banco.cliente.conta.ContaPoupanca;
 
@@ -24,6 +23,7 @@ public class Cliente {
         this.dataCadastro = LocalDate.now();
         this.statusAtivo = statusAtivo;
         this.contaCorrente = new ContaCorrente(tipo);
+        System.out.println(nome + " seja bem-vindo à Caixa! Sua conta corrente de numero " + contaCorrente.getNumeroConta() + " foi aberta nesta data!");
     }
     public void criarContaPoupanca(){
         if (tipo.equals("PF")) {
@@ -42,28 +42,9 @@ public class Cliente {
         return nome;
     }
 
-    public LocalDate getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public boolean isStatusAtivo() {
-        return statusAtivo;
-    }
-
     public String getTipo() {
         System.out.println("Este cliente é um cliente " + tipo);
         return tipo;
-    }
-
-    public ContaCorrente getContaCorrente() {
-        return contaCorrente;
-    }
-    public String getNumeroContaCorrente(){
-        return contaCorrente.getNumeroConta();
-    }
-
-    public ContaPoupanca getContaPoupanca() {
-        return contaPoupanca;
     }
 
     @Override
